@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Tu Ramo de Flores Amarillas 💐 | 21 de Septiembre</title>
+
+    <meta name="description" content="Un hermoso y gran ramo de flores amarillas creado en código para iluminar tu 21 de septiembre.">
+    <meta name="theme-color" content="#FEF3C7">
+
+    <!-- Tipografía Refinada de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --gold-primary: #F59E0B;
+            --yellow-sun: #FBBF24;
+            --yellow-bright: #FDE047;
+            --yellow-soft: #FEF08A;
+            --orange-warm: #EA580C;
+            --text-title: #2E2108;
+            --text-body: #4A3A19;
+            --text-muted: #8A6D3B;
+            --card-glass: rgba(255, 253, 248, 0.94);
+            --card-border: rgba(245, 158, 11, 0.28);
+            --card-glow: rgba(245, 158, 11, 0.15);
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            --ease-bloom: cubic-bezier(0.34, 1.4, 0.64, 1);
+            --ease-soft: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100svh;
+            min-height: -webkit-fill-available;
+            overflow-x: hidden;
+            overflow-y: auto;
+            font-family: var(--font-sans);
+            color: var(--text-body);
+            background: radial-gradient(circle at 50% 15%, #FFFDF9 0%, #FEF8E7 40%, #FDE9B8 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            user-select: none;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Resplandor y Luz Primaveral */
+        .sunbeam-ambient {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(ellipse at 50% 25%, rgba(254, 240, 138, 0.5) 0%, rgba(253, 230, 138, 0.2) 50%, transparent 75%);
+        }
+
+        /* Canvas para Partículas y Pétalos Flotantes */
+        #effectsCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Botón de Música Flotante Minimalista */
+        .music-btn {
+            position: fixed;
+            top: clamp(16px, 3vh, 24px);
+            right: clamp(16px, 4vw, 24px);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 15px rgba(138, 109, 59, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            transition: transform 0.3s var(--ease-soft), background 0.3s ease;
+            color: var(--text-title);
+        }
+
+        .music-btn:hover {
+            transform: scale(1.08);
+            background: #FFFFFF;
+            border-color: var(--gold-primary);
+        }
+
+        .music-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .music-btn.playing {
+            color: var(--gold-primary);
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 16px rgba(245, 158, 11, 0.35);
+        }
+
+        .music-btn.playing svg {
+            animation: musicBounce 2s infinite ease-in-out;
+        }
+
+        @keyframes musicBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15) rotate(6deg); }
+        }
+
+        /* Contenedor Principal de la Página */
+        .bouquet-page-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 520px;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(20px, 3vh, 32px) clamp(16px, 4vw, 24px);
+            text-align: center;
+            animation: pageFadeIn 1.2s var(--ease-soft) both;
+        }
+
+        @keyframes pageFadeIn {
+            from { opacity: 0; transform: translateY(22px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bouquet-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: rgba(254, 240, 138, 0.6);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: clamp(12px, 2vh, 18px);
+            backdrop-filter: blur(6px);
+        }
+
+        /* ==========================================================================
+           ESCENARIO DEL RAMO ARTESANAL EN CÓDIGO (CSS + SVG DINÁMICO)
+           ========================================================================== */
+        .bouquet-stage-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            height: clamp(360px, 52vh, 450px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: clamp(14px, 2.5vh, 24px);
+            cursor: pointer;
+            transform-origin: center bottom;
+            animation: bouquetBreathing 5.5s infinite ease-in-out alternate;
+        }
+
+        @keyframes bouquetBreathing {
+            0% {
+                transform: translateY(0) rotate(-0.6deg) scale(1);
+            }
+            50% {
+                transform: translateY(-8px) rotate(0.6deg) scale(1.015);
+            }
+            100% {
+                transform: translateY(-4px) rotate(-0.4deg) scale(1.008);
+            }
+        }
+
+        .bouquet-stage-wrapper:active {
+            transform: scale(0.98);
+        }
+
+        /* Resplandor y halo luminoso detrás del ramo */
+        .bouquet-backlight {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(254, 240, 138, 0.85) 0%, rgba(251, 191, 36, 0.35) 45%, transparent 70%);
+            filter: blur(22px);
+            z-index: 1;
+            pointer-events: none;
+            animation: backlightPulse 4s infinite ease-in-out alternate;
+        }
+
+        @keyframes backlightPulse {
+            0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.75; }
+            100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        }
+
+        /* SVG del Gran Ramo */
+        .bouquet-svg-render {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 18px 30px rgba(110, 80, 20, 0.16)) drop-shadow(0 6px 12px rgba(245, 158, 11, 0.18));
+            overflow: visible;
+        }
+
+        /* Micro-animaciones de brisa independientes para cada flor (rotan alrededor de su origen local 0,0) */
+        .flower-sway-slow {
+            transform-origin: 0 0;
+            animation: localSway 4.5s infinite ease-in-out alternate;
+        }
+
+        .flower-sway-fast {
+            transform-origin: 0 0;
+            animation: localSway 3.6s infinite ease-in-out alternate-reverse;
+        }
+
+        .flower-sway-gentle {
+            transform-origin: 0 0;
+            animation: localSway 5.2s infinite ease-in-out alternate;
+        }
+
+        @keyframes localSway {
+            0% { transform: rotate(-2.2deg); }
+            100% { transform: rotate(2.5deg); }
+        }
+
+        /* Movimiento suave de la cinta y lazo */
+        .ribbon-loop-left {
+            transform-origin: 0 0;
+            animation: ribbonFlutter 3.8s infinite ease-in-out alternate;
+        }
+
+        .ribbon-loop-right {
+            transform-origin: 0 0;
+            animation: ribbonFlutter 3.8s infinite ease-in-out alternate-reverse;
+        }
+
+        .ribbon-tail-1 {
+            transform-origin: 0 0;
+            animation: ribbonWave 4.5s infinite ease-in-out alternate;
+        }
+
+        .ribbon-tail-2 {
+            transform-origin: 0 0;
+            animation: ribbonWave 4.8s infinite ease-in-out alternate-reverse;
+        }
+
+        @keyframes ribbonFlutter {
+            0% { transform: scale(0.97) rotate(-1.5deg); }
+            100% { transform: scale(1.03) rotate(2deg); }
+        }
+
+        @keyframes ribbonWave {
+            0% { transform: rotate(-3deg) skewX(-2deg); }
+            100% { transform: rotate(4deg) skewX(3deg); }
+        }
+
+        /* Indicador de toque interactivo */
+        .tap-callout {
+            position: absolute;
+            bottom: 4px;
+            background: rgba(255, 253, 248, 0.92);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 999px;
+            padding: 5px 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-title);
+            z-index: 10;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+            pointer-events: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            animation: calloutBounce 3s infinite ease-in-out;
+        }
+
+        @keyframes calloutBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        /* ==========================================================================
+           TARJETA CON MENSAJE ROMÁNTICO
+           ========================================================================== */
+        .romantic-message-box {
+            background: var(--card-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: clamp(22px, 4vw, 32px) clamp(18px, 4vw, 28px);
+            box-shadow: 
+                0 18px 45px rgba(110, 80, 20, 0.08),
+                0 6px 20px var(--card-glow);
+            width: 100%;
+            text-align: center;
+        }
+
+        .message-heading {
+            font-family: var(--font-serif);
+            font-size: clamp(1.6rem, 5vw, 2.1rem);
+            font-weight: 700;
+            color: #B45309;
+            line-height: 1.25;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .message-divider {
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            margin: 0 auto 16px auto;
+        }
+
+        .message-quote {
+            font-family: var(--font-serif);
+            font-size: clamp(1.1rem, 3.8vw, 1.35rem);
+            line-height: 1.48;
+            color: var(--text-title);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .message-dedication {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold-primary);
+            margin-bottom: 22px;
+        }
+
+        .action-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-interact {
+            background: linear-gradient(135deg, #FEF08A 0%, #F59E0B 100%);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 999px;
+            padding: 10px 22px;
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #382405;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25);
+            transition: all 0.3s var(--ease-bloom);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn-interact:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-back-garden {
+            background: rgba(254, 240, 138, 0.4);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            border-radius: 999px;
+            padding: 10px 20px;
+            font-family: var(--font-sans);
+            font-size: 0.86rem;
+            font-weight: 500;
+            color: var(--text-body);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn-back-garden:hover {
+            background: rgba(254, 240, 138, 0.75);
+            border-color: var(--gold-primary);
+            transform: translateY(-2px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bouquet-stage-wrapper, .flower-sway-slow, .flower-sway-fast, .flower-sway-gentle, .ribbon-loop-left, .ribbon-loop-right, .ribbon-tail-1, .ribbon-tail-2 {
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Resplandor primaveral sutil -->
+    <div class="sunbeam-ambient"></div>
+
+    <!-- Canvas para lluvia de pétalos y destellos -->
+    <canvas id="effectsCanvas"></canvas>
+
+    <!-- Botón de Audio Minimalista -->
+    <button id="musicToggleBtn" class="music-btn" aria-label="Activar música ambiental" title="Música ambiental">
+        <svg viewBox="0 0 24 24" id="musicIcon">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+    </button>
+
+    <!-- Contenedor Principal del Ramo -->
+    <main class="bouquet-page-container">
+
+        <div class="bouquet-badge">
+            <span>✨</span> Ramo de Flores Amarillas <span>✨</span>
+        </div>
+
+        <!-- ==========================================================================
+             GRAN RAMO BOTÁNICO CON MÚLTIPLES FLORES UNIFICADAS A SUS TALLOS
+             ========================================================================== -->
+        <div class="bouquet-stage-wrapper" id="bouquetStage" title="¡Haz clic para enviar amor y destellos!">
+            <!-- Halo luminoso de fondo -->
+            <div class="bouquet-backlight"></div>
+
+            <!-- SVG Maestro del Ramo Completo -->
+            <svg class="bouquet-svg-render" viewBox="0 0 400 490">
+                <defs>
+                    <!-- Degradados de Pétalos Dorados y Cálidos -->
+                    <linearGradient id="petalSunGold" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#D97706" />
+                        <stop offset="35%" stop-color="#F59E0B" />
+                        <stop offset="75%" stop-color="#FBBF24" />
+                        <stop offset="100%" stop-color="#FEF08A" />
+                    </linearGradient>
+
+                    <linearGradient id="petalWarmOrange" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#B45309" />
+                        <stop offset="40%" stop-color="#EA580C" />
+                        <stop offset="80%" stop-color="#FBBF24" />
+                        <stop offset="100%" stop-color="#FDE047" />
+                    </linearGradient>
+
+                    <linearGradient id="petalBrightYellow" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#F59E0B" />
+                        <stop offset="50%" stop-color="#FDE047" />
+                        <stop offset="100%" stop-color="#FFFBEB" />
+                    </linearGradient>
+
+                    <!-- Degradados del Centro de las Flores -->
+                    <radialGradient id="centerSunflowerDark" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#3B1C04" />
+                        <stop offset="55%" stop-color="#552406" />
+                        <stop offset="82%" stop-color="#92400E" />
+                        <stop offset="100%" stop-color="#D97706" />
+                    </radialGradient>
+
+                    <radialGradient id="centerGoldenAmber" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#78350F" />
+                        <stop offset="65%" stop-color="#B45309" />
+                        <stop offset="100%" stop-color="#FBBF24" />
+                    </radialGradient>
+
+                    <!-- Degradados de Hojas de Eucalipto y Follaje -->
+                    <linearGradient id="leafEucalyptus" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#2D4A14" />
+                        <stop offset="55%" stop-color="#4D7C0F" />
+                        <stop offset="100%" stop-color="#84CC16" />
+                    </linearGradient>
+
+                    <linearGradient id="leafSage" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#1E3A1A" />
+                        <stop offset="60%" stop-color="#3F6212" />
+                        <stop offset="100%" stop-color="#65A30D" />
+                    </linearGradient>
+
+                    <!-- Degradados del Papel de Envoltura (Kraft Artesanal) -->
+                    <linearGradient id="wrapPaperBack" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#EAD9BA" />
+                        <stop offset="50%" stop-color="#DFC49E" />
+                        <stop offset="100%" stop-color="#CBB089" />
+                    </linearGradient>
+
+                    <linearGradient id="wrapPaperLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#F5E8CE" />
+                        <stop offset="60%" stop-color="#DFC5A0" />
+                        <stop offset="100%" stop-color="#C5A881" />
+                    </linearGradient>
+
+                    <linearGradient id="wrapPaperRight" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#FAF1DE" />
+                        <stop offset="60%" stop-color="#E5CCA8" />
+                        <stop offset="100%" stop-color="#CEB38E" />
+                    </linearGradient>
+
+                    <linearGradient id="wrapPaperFront" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#DFC7A3" />
+                        <stop offset="100%" stop-color="#B89B72" />
+                    </linearGradient>
+
+                    <!-- Degradado del Lazo de Raso Dorado -->
+                    <linearGradient id="ribbonSilkGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#FEF08A" />
+                        <stop offset="25%" stop-color="#FBBF24" />
+                        <stop offset="65%" stop-color="#F59E0B" />
+                        <stop offset="100%" stop-color="#B45309" />
+                    </linearGradient>
+
+                    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#5B4314" flood-opacity="0.25" />
+                    </filter>
+                </defs>
+
+                <!-- ==========================================
+                     1. CAPA POSTERIOR: ENVOLTURA Y TALLOS DE FONDO
+                     ========================================== -->
+                <!-- Puntas del papel kraft posterior -->
+                <polygon points="200,430 70,180 130,120 200,160 270,120 330,180" fill="url(#wrapPaperBack)" filter="url(#softShadow)" />
+                <polygon points="200,430 85,160 145,130 200,170" fill="#D3B892" opacity="0.6" />
+                <polygon points="200,430 315,160 255,130 200,170" fill="#E2C9A4" opacity="0.6" />
+
+                <!-- Tallos que sobresalen por la base inferior del papel -->
+                <g stroke="#365314" stroke-width="4.5" stroke-linecap="round">
+                    <line x1="190" y1="420" x2="182" y2="455" />
+                    <line x1="198" y1="420" x2="197" y2="465" />
+                    <line x1="205" y1="420" x2="208" y2="462" />
+                    <line x1="212" y1="420" x2="218" y2="454" />
+                </g>
+
+                <!-- ==========================================
+                     2. RAMAS Y TALLOS VISIBLES CONECTADOS A CADA FLOR
+                     ========================================== -->
+                <g stroke="#4D7C0F" stroke-linecap="round" fill="none">
+                    <!-- Tallo a Flor 2 (Superior Centro) -->
+                    <path d="M 200,340 Q 202,230 200,140" stroke-width="6.5" />
+                    <!-- Tallo a Flor 5 (Alta Izquierda) -->
+                    <path d="M 195,340 Q 170,220 145,115" stroke-width="5" />
+                    <!-- Tallo a Flor 6 (Alta Derecha) -->
+                    <path d="M 205,340 Q 230,220 255,115" stroke-width="5" />
+                    <!-- Tallo a Flor 3 (Lateral Izquierda) -->
+                    <path d="M 190,340 Q 150,260 130,185" stroke-width="6" />
+                    <!-- Tallo a Flor 4 (Lateral Derecha) -->
+                    <path d="M 210,340 Q 250,260 270,185" stroke-width="6" />
+                    <!-- Tallo a Flor 1 (Gran Girasol Central) -->
+                    <path d="M 200,340 Q 200,285 200,235" stroke-width="8" stroke="#365314" />
+                </g>
+
+                <!-- Follaje de Eucalipto entremezclado con las flores -->
+                <!-- Ramas laterales de eucalipto -->
+                <g>
+                    <!-- Eucalipto Izquierdo -->
+                    <path d="M 180,310 Q 110,230 65,130" fill="none" stroke="#365314" stroke-width="3" />
+                    <ellipse cx="65" cy="130" rx="14" ry="9" transform="rotate(-35 65 130)" fill="url(#leafEucalyptus)" />
+                    <ellipse cx="90" cy="155" rx="15" ry="10" transform="rotate(-25 90 155)" fill="url(#leafEucalyptus)" />
+                    <ellipse cx="115" cy="180" rx="17" ry="11" transform="rotate(-15 115 180)" fill="url(#leafSage)" />
+
+                    <!-- Eucalipto Derecho -->
+                    <path d="M 220,310 Q 290,230 335,130" fill="none" stroke="#365314" stroke-width="3" />
+                    <ellipse cx="335" cy="130" rx="14" ry="9" transform="rotate(35 335 130)" fill="url(#leafEucalyptus)" />
+                    <ellipse cx="310" cy="155" rx="15" ry="10" transform="rotate(25 310 155)" fill="url(#leafEucalyptus)" />
+                    <ellipse cx="285" cy="180" rx="17" ry="11" transform="rotate(15 285 180)" fill="url(#leafSage)" />
+
+                    <!-- Bolitas doradas de mimosa silvestre -->
+                    <circle cx="95" cy="105" r="4.5" fill="#FDE047" />
+                    <circle cx="102" cy="98" r="4" fill="#FBBF24" />
+                    <circle cx="305" cy="105" r="4.5" fill="#FDE047" />
+                    <circle cx="298" cy="98" r="4" fill="#FBBF24" />
+                </g>
+
+                <!-- ==========================================
+                     3. CONJUNTO DE FLORES AMARILLAS HERMOSAS
+                     (Cada una anclada a su coordenada exacta)
+                     ========================================== -->
+
+                <!-- FLOR 5: FLOR ALTA IZQUIERDA (Girasol Silvestre) -->
+                <g transform="translate(145, 115)">
+                    <g class="flower-sway-fast">
+                        <!-- Sépalos -->
+                        <circle cx="0" cy="0" r="14" fill="#365314" />
+                        <!-- Pétalos (14 pétalos) -->
+                        <g fill="url(#petalBrightYellow)">
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(0)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(25.7)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(51.4)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(77.1)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(102.8)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(128.5)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(154.2)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(180)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(205.7)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(231.4)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(257.1)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(282.8)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(308.5)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(334.2)" />
+                        </g>
+                        <circle cx="0" cy="0" r="11" fill="url(#centerSunflowerDark)" stroke="#F59E0B" stroke-width="1.5" />
+                        <circle cx="0" cy="0" r="4" fill="#D97706" />
+                    </g>
+                </g>
+
+                <!-- FLOR 6: FLOR ALTA DERECHA (Girasol Silvestre) -->
+                <g transform="translate(255, 115)">
+                    <g class="flower-sway-gentle">
+                        <circle cx="0" cy="0" r="14" fill="#365314" />
+                        <g fill="url(#petalBrightYellow)">
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(12)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(37.7)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(63.4)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(89.1)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(114.8)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(140.5)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(166.2)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(192)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(217.7)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(243.4)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(269.1)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(294.8)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(320.5)" />
+                            <path d="M 0,0 C -4,-10 -3,-24 0,-28 C 3,-24 4,-10 0,0" transform="rotate(346.2)" />
+                        </g>
+                        <circle cx="0" cy="0" r="11" fill="url(#centerSunflowerDark)" stroke="#F59E0B" stroke-width="1.5" />
+                        <circle cx="0" cy="0" r="4" fill="#D97706" />
+                    </g>
+                </g>
+
+                <!-- FLOR 2: CRISANTEMO SUPERIOR CENTRO -->
+                <g transform="translate(200, 140)">
+                    <g class="flower-sway-slow">
+                        <circle cx="0" cy="0" r="18" fill="#365314" />
+                        <!-- Pétalos dobles en capas -->
+                        <g fill="url(#petalWarmOrange)">
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(0)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(22.5)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(45)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(67.5)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(90)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(112.5)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(135)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(157.5)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(180)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(202.5)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(225)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(247.5)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(270)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(292.5)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(315)" />
+                            <path d="M 0,0 C -5,-14 -4,-32 0,-38 C 4,-32 5,-14 0,0" transform="rotate(337.5)" />
+                        </g>
+                        <!-- Capa interna brillante -->
+                        <g fill="url(#petalBrightYellow)">
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(11.25)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(33.75)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(56.25)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(78.75)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(101.25)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(123.75)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(146.25)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(168.75)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(191.25)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(213.75)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(236.25)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(258.75)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(281.25)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(303.75)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(326.25)" />
+                            <path d="M 0,0 C -4,-10 -3,-22 0,-26 C 3,-22 4,-10 0,0" transform="rotate(348.75)" />
+                        </g>
+                        <circle cx="0" cy="0" r="14" fill="url(#centerGoldenAmber)" stroke="#F59E0B" stroke-width="1.5" />
+                    </g>
+                </g>
+
+                <!-- FLOR 3: ROSA AMARILLA ABIERTA (LATERAL IZQUIERDA) -->
+                <g transform="translate(130, 185) rotate(-10)">
+                    <g class="flower-sway-fast">
+                        <circle cx="0" cy="0" r="16" fill="#365314" />
+                        <g fill="url(#petalSunGold)">
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(0)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(45)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(90)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(135)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(180)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(225)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(270)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(315)" />
+                        </g>
+                        <g fill="url(#petalBrightYellow)">
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(22.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(67.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(112.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(157.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(202.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(247.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(292.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(337.5)" />
+                        </g>
+                        <circle cx="0" cy="0" r="14" fill="url(#centerSunflowerDark)" stroke="#F59E0B" stroke-width="1.8" />
+                        <circle cx="3" cy="-2" r="1.3" fill="#FEF08A" />
+                        <circle cx="-3" cy="2" r="1.2" fill="#FDE047" />
+                    </g>
+                </g>
+
+                <!-- FLOR 4: ROSA AMARILLA ABIERTA (LATERAL DERECHA) -->
+                <g transform="translate(270, 185) rotate(10)">
+                    <g class="flower-sway-gentle">
+                        <circle cx="0" cy="0" r="16" fill="#365314" />
+                        <g fill="url(#petalSunGold)">
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(10)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(55)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(100)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(145)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(190)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(235)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(280)" />
+                            <path d="M 0,0 C -10,-14 -14,-32 0,-40 C 14,-32 10,-14 0,0" transform="rotate(325)" />
+                        </g>
+                        <g fill="url(#petalBrightYellow)">
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(32.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(77.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(122.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(167.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(212.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(257.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(302.5)" />
+                            <path d="M 0,0 C -7,-10 -10,-24 0,-30 C 10,-24 7,-10 0,0" transform="rotate(347.5)" />
+                        </g>
+                        <circle cx="0" cy="0" r="14" fill="url(#centerSunflowerDark)" stroke="#F59E0B" stroke-width="1.8" />
+                        <circle cx="-2" cy="-3" r="1.3" fill="#FEF08A" />
+                        <circle cx="2" cy="3" r="1.2" fill="#FDE047" />
+                    </g>
+                </g>
+
+                <!-- FLOR 1: EL GRAN GIRASOL PROTAGONISTA (CENTRAL) -->
+                <g transform="translate(200, 235)">
+                    <g class="flower-sway-slow">
+                        <!-- Sépalos verdes -->
+                        <g fill="#365314">
+                            <polygon points="0,0 -12,38 12,38" transform="rotate(30)" />
+                            <polygon points="0,0 -12,38 12,38" transform="rotate(90)" />
+                            <polygon points="0,0 -12,38 12,38" transform="rotate(150)" />
+                            <polygon points="0,0 -12,38 12,38" transform="rotate(210)" />
+                            <polygon points="0,0 -12,38 12,38" transform="rotate(270)" />
+                            <polygon points="0,0 -12,38 12,38" transform="rotate(330)" />
+                        </g>
+
+                        <!-- Capa Externa: 20 Pétalos Grandes de Girasol -->
+                        <g fill="url(#petalSunGold)">
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(0)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(18)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(36)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(54)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(72)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(90)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(108)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(126)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(144)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(162)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(180)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(198)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(216)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(234)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(252)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(270)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(288)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(306)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(324)" />
+                            <path d="M 0,0 C -8,-18 -10,-46 0,-55 C 10,-46 8,-18 0,0" transform="rotate(342)" />
+                        </g>
+
+                        <!-- Capa Media: 20 Pétalos Desfasados -->
+                        <g fill="url(#petalBrightYellow)">
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(9)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(27)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(45)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(63)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(81)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(99)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(117)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(135)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(153)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(171)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(189)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(207)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(225)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(243)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(261)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(279)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(297)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(315)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(333)" />
+                            <path d="M 0,0 C -6,-15 -8,-36 0,-44 C 8,-36 6,-15 0,0" transform="rotate(351)" />
+                        </g>
+
+                        <!-- Capa Interna Brillante -->
+                        <g fill="#FEF08A" opacity="0.95">
+                            <path d="M 0,0 C -4,-10 -6,-22 0,-27 C 6,-22 4,-10 0,0" transform="rotate(0)" />
+                            <path d="M 0,0 C -4,-10 -6,-22 0,-27 C 6,-22 4,-10 0,0" transform="rotate(36)" />
+                            <path d="M 0,0 C -4,-10 -6,-22 0,-27 C 6,-22 4,-10 0,0" transform="rotate(72)" />
+                            <path d="M 0,0 C -4,-10 -6,-22 0,-27 C 6,-22 4,-10 0,0" transform="rotate(108)" />
+                            <path d="M 0,0 C -4,-10 -6,-22 0,-27 C 6,-22 4,-10 0,0" transform="rotate(144)" />
+                            <path d="M 0,0 C -4,-10 -6,-22 0,-27 C 6,-22 4,-10 0,0" transform="rotate(180)" />
+                            <path d="M 0,0 C -4,-10 -6,-22 0,-27 C 6,-22 4,-10 0,0" transform="rotate(216)" />
+                            <path d="M 0,0 C -4,-10 -6,-22 0,-27 C 6,-22 4,-10 0,0" transform="rotate(252)" />
+                            <path d="M 0,0 C -4,-10 -6,-22 0,-27 C 6,-22 4,-10 0,0" transform="rotate(288)" />
+                            <path d="M 0,0 C -4,-10 -6,-22 0,-27 C 6,-22 4,-10 0,0" transform="rotate(324)" />
+                        </g>
+
+                        <!-- Gran Disco Central Texturado -->
+                        <circle cx="0" cy="0" r="22" fill="url(#centerSunflowerDark)" stroke="#F59E0B" stroke-width="2.5" />
+                        <circle cx="0" cy="0" r="15" fill="none" stroke="#D97706" stroke-width="1.8" stroke-dasharray="3,3" />
+                        <circle cx="0" cy="0" r="9" fill="none" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="2.5,2.5" />
+                        <circle cx="-5" cy="-5" r="1.5" fill="#FDE047" />
+                        <circle cx="5" cy="-6" r="1.4" fill="#FEF08A" />
+                        <circle cx="6" cy="4" r="1.6" fill="#FDE047" />
+                        <circle cx="-4" cy="5" r="1.5" fill="#FEF08A" />
+                        <circle cx="0" cy="0" r="2" fill="#FDE047" />
+                    </g>
+                </g>
+
+                <!-- ==========================================
+                     4. ENVOLTURA ARTESANAL FRONTAL CON PLIEGUES Y SOMBRA
+                     ========================================== -->
+                <!-- Ala Izquierda del Papel Kraft Frontal -->
+                <polygon points="120,290 200,425 155,425 80,310" fill="url(#wrapPaperLeft)" filter="url(#softShadow)" />
+                <polygon points="120,290 200,425 140,360" fill="#BFA37E" opacity="0.4" />
+
+                <!-- Ala Derecha del Papel Kraft Frontal (Cruzada sobre la izquierda) -->
+                <polygon points="280,290 200,425 245,425 320,310" fill="url(#wrapPaperRight)" filter="url(#softShadow)" />
+                <polygon points="280,290 200,425 260,360" fill="#BFA37E" opacity="0.3" />
+
+                <!-- Cuerpo Central de la Envoltura -->
+                <polygon points="120,290 200,325 280,290 220,425 180,425" fill="url(#wrapPaperFront)" opacity="0.9" />
+
+                <!-- Detalle de Doblez Superior del Papel -->
+                <polygon points="120,290 200,315 160,285" fill="#FEF3C7" opacity="0.75" />
+                <polygon points="280,290 200,315 240,285" fill="#FEF3C7" opacity="0.75" />
+
+                <!-- ==========================================
+                     5. FLOR FRONTAL QUE ASOMA SOBRE EL PLIEGUE
+                     ========================================== -->
+                <g transform="translate(200, 310) scale(0.72)">
+                    <g class="flower-sway-fast">
+                        <g fill="url(#petalBrightYellow)">
+                            <path d="M 0,0 C -5,-10 -6,-22 0,-26 C 6,-22 5,-10 0,0" transform="rotate(0)" />
+                            <path d="M 0,0 C -5,-10 -6,-22 0,-26 C 6,-22 5,-10 0,0" transform="rotate(36)" />
+                            <path d="M 0,0 C -5,-10 -6,-22 0,-26 C 6,-22 5,-10 0,0" transform="rotate(72)" />
+                            <path d="M 0,0 C -5,-10 -6,-22 0,-26 C 6,-22 5,-10 0,0" transform="rotate(108)" />
+                            <path d="M 0,0 C -5,-10 -6,-22 0,-26 C 6,-22 5,-10 0,0" transform="rotate(144)" />
+                            <path d="M 0,0 C -5,-10 -6,-22 0,-26 C 6,-22 5,-10 0,0" transform="rotate(180)" />
+                            <path d="M 0,0 C -5,-10 -6,-22 0,-26 C 6,-22 5,-10 0,0" transform="rotate(216)" />
+                            <path d="M 0,0 C -5,-10 -6,-22 0,-26 C 6,-22 5,-10 0,0" transform="rotate(252)" />
+                            <path d="M 0,0 C -5,-10 -6,-22 0,-26 C 6,-22 5,-10 0,0" transform="rotate(288)" />
+                            <path d="M 0,0 C -5,-10 -6,-22 0,-26 C 6,-22 5,-10 0,0" transform="rotate(324)" />
+                        </g>
+                        <circle cx="0" cy="0" r="10" fill="url(#centerSunflowerDark)" stroke="#F59E0B" stroke-width="1.5" />
+                    </g>
+                </g>
+
+                <!-- ==========================================
+                     6. LAZO Y CINTA DE RASO DORADA CON MOVIMIENTO
+                     ========================================== -->
+                <g filter="url(#softShadow)">
+                    <!-- Cinta que ciñe el ramo -->
+                    <path d="M 168,362 Q 200,370 232,362 Q 230,378 200,384 Q 170,378 168,362 Z" fill="url(#ribbonSilkGold)" />
+
+                    <!-- Lazo Izquierdo Animado -->
+                    <g transform="translate(195, 372)">
+                        <path class="ribbon-loop-left" d="M 0,0 C -35,-27 -55,-7 -20,13 C -5,18 0,8 0,0 Z" fill="url(#ribbonSilkGold)" stroke="#D97706" stroke-width="1.2" />
+                    </g>
+
+                    <!-- Lazo Derecho Animado -->
+                    <g transform="translate(205, 372)">
+                        <path class="ribbon-loop-right" d="M 0,0 C 35,-27 55,-7 20,13 C 5,18 0,8 0,0 Z" fill="url(#ribbonSilkGold)" stroke="#D97706" stroke-width="1.2" />
+                    </g>
+
+                    <!-- Nudo del Centro -->
+                    <ellipse cx="200" cy="374" rx="9" ry="8" fill="url(#ribbonSilkGold)" stroke="#B45309" stroke-width="1.5" />
+                    <circle cx="198" cy="372" r="2.5" fill="#FEF08A" opacity="0.85" />
+
+                    <!-- Cinta colgante izquierda animada con brisa -->
+                    <g transform="translate(195, 378)">
+                        <path class="ribbon-tail-1" d="M 0,0 Q -25,32 -17,67 Q -10,42 3,4 Z" fill="url(#ribbonSilkGold)" />
+                    </g>
+
+                    <!-- Cinta colgante derecha animada con brisa -->
+                    <g transform="translate(205, 378)">
+                        <path class="ribbon-tail-2" d="M 0,0 Q 25,32 17,70 Q 10,42 -3,4 Z" fill="url(#ribbonSilkGold)" />
+                    </g>
+                </g>
+
+                <!-- Partículas doradas que brotan del ramo -->
+                <circle cx="105" cy="190" r="2.5" fill="#FDE047" opacity="0.85" />
+                <circle cx="295" cy="210" r="3" fill="#FEF08A" opacity="0.9" />
+                <circle cx="200" cy="90" r="2.8" fill="#FBBF24" opacity="0.8" />
+                <circle cx="150" cy="270" r="2.2" fill="#FDE047" opacity="0.8" />
+                <circle cx="250" cy="270" r="2.5" fill="#FEF08A" opacity="0.85" />
+            </svg>
+
+            <div class="tap-callout">
+                <span>✨ Toca el ramo</span>
+            </div>
+        </div>
+
+        <!-- ==========================================================================
+             TARJETA CON MENSAJE Y DEDICATORIA ROMÁNTICA
+             ========================================================================== -->
+        <section class="romantic-message-box">
+            <h1 class="message-heading">¡Un ramo eterno para ti! 💐💛</h1>
+            <div class="message-divider"></div>
+
+            <p class="message-quote">
+                “Que la vida te llene siempre de tanta luz, calidez y alegría como estas flores amarillas.”
+            </p>
+
+            <div class="message-dedication">
+                Con todo mi cariño, hoy y siempre ✨🌻
+            </div>
+
+            <div class="action-row">
+                <button id="burstLoveBtn" class="btn-interact">
+                    <span>✨ Enviar Amor</span>
+                </button>
+                <a href="./index.html" class="btn-back-garden">
+                    <span>🌿 Volver al Jardín</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        /* ==========================================================================
+           FÍSICA DE PÉTALOS Y DESTELLOS LUMINOSOS (CANVAS)
+           ========================================================================== */
+        class PetalPhysicsSystem {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.petals = [];
+                this.sparkles = [];
+                this.active = false;
+
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+            }
+
+            resize() {
+                this.width = this.canvas.width = window.innerWidth;
+                this.height = this.canvas.height = window.innerHeight;
+            }
+
+            createPetal(randomY = false) {
+                return {
+                    x: Math.random() * this.width,
+                    y: randomY ? Math.random() * this.height : -25,
+                    size: Math.random() * 11 + 9,
+                    speedY: Math.random() * 1.2 + 0.7,
+                    speedX: Math.random() * 0.9 - 0.45,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 2,
+                    color: ['#F59E0B', '#FBBF24', '#FDE047', '#FEF08A'][Math.floor(Math.random() * 4)],
+                    wobble: Math.random() * Math.PI * 2,
+                    wobbleSpeed: Math.random() * 0.025 + 0.015
+                };
+            }
+
+            createSparkle(x, y) {
+                return {
+                    x: x !== undefined ? x : Math.random() * this.width,
+                    y: y !== undefined ? y : Math.random() * this.height,
+                    size: Math.random() * 3 + 1,
+                    color: ['#FDE047', '#FBBF24', '#FFFFFF', '#FEF08A'][Math.floor(Math.random() * 4)],
+                    opacity: Math.random() * 0.8 + 0.2,
+                    speedY: -Math.random() * 0.8 - 0.3,
+                    speedX: (Math.random() - 0.5) * 0.6
+                };
+            }
+
+            burst(x, y) {
+                for (let i = 0; i < 22; i++) {
+                    this.sparkles.push(this.createSparkle(x, y));
+                }
+                for (let i = 0; i < 8; i++) {
+                    const p = this.createPetal(false);
+                    p.x = x + (Math.random() - 0.5) * 45;
+                    p.y = y + (Math.random() - 0.5) * 45;
+                    p.speedY = -Math.random() * 2.5 - 1;
+                    this.petals.push(p);
+                }
+            }
+
+            start() {
+                if (this.active) return;
+                this.active = true;
+
+                for (let i = 0; i < 26; i++) {
+                    this.petals.push(this.createPetal(true));
+                }
+                for (let i = 0; i < 35; i++) {
+                    this.sparkles.push(this.createSparkle());
+                }
+
+                this.loop();
+            }
+
+            loop() {
+                if (!this.active) return;
+                this.ctx.clearRect(0, 0, this.width, this.height);
+
+                // Destellos
+                for (let i = this.sparkles.length - 1; i >= 0; i--) {
+                    const s = this.sparkles[i];
+                    s.y += s.speedY;
+                    s.x += s.speedX;
+                    s.opacity -= 0.005;
+
+                    if (s.opacity <= 0 || s.y < -10) {
+                        this.sparkles[i] = this.createSparkle(Math.random() * this.width, this.height + 10);
+                        continue;
+                    }
+
+                    this.ctx.save();
+                    this.ctx.globalAlpha = Math.max(0, s.opacity);
+                    this.ctx.fillStyle = s.color;
+                    this.ctx.beginPath();
+                    this.ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                    this.ctx.fill();
+                    this.ctx.restore();
+                }
+
+                // Pétalos
+                for (let i = this.petals.length - 1; i >= 0; i--) {
+                    const p = this.petals[i];
+                    p.wobble += p.wobbleSpeed;
+                    p.x += Math.sin(p.wobble) * 1.1 + p.speedX;
+                    p.y += p.speedY;
+                    p.rotation += p.rotationSpeed;
+
+                    if (p.y > this.height + 25) {
+                        this.petals[i] = this.createPetal(false);
+                        continue;
+                    }
+
+                    this.ctx.save();
+                    this.ctx.translate(p.x, p.y);
+                    this.ctx.rotate((p.rotation * Math.PI) / 180);
+                    this.ctx.fillStyle = p.color;
+                    this.ctx.globalAlpha = 0.9;
+
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, 0);
+                    this.ctx.quadraticCurveTo(p.size / 2, -p.size / 2, 0, -p.size);
+                    this.ctx.quadraticCurveTo(-p.size / 2, -p.size / 2, 0, 0);
+                    this.ctx.fill();
+                    this.ctx.restore();
+                }
+
+                requestAnimationFrame(() => this.loop());
+            }
+        }
+
+        /* ==========================================================================
+           SISTEMA DE MÚSICA AMBIENTAL SUAVE
+           ========================================================================== */
+        class SubtleAudioPlayer {
+            constructor() {
+                this.audioCtx = null;
+                this.isPlaying = false;
+                this.timer = null;
+            }
+
+            init() {
+                if (!this.audioCtx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.audioCtx = new AudioContext();
+                }
+                if (this.audioCtx.state === 'suspended') {
+                    this.audioCtx.resume();
+                }
+            }
+
+            playMelodicChords() {
+                if (!this.isPlaying || !this.audioCtx) return;
+
+                const chords = [
+                    [329.63, 392.00, 493.88, 659.25], // E major
+                    [277.18, 329.63, 440.00, 554.37], // C#m
+                    [220.00, 277.18, 329.63, 440.00], // A
+                    [246.94, 311.13, 392.00, 493.88]  // B
+                ];
+                let current = 0;
+
+                const step = () => {
+                    if (!this.isPlaying || !this.audioCtx) return;
+                    const chord = chords[current];
+                    const t = this.audioCtx.currentTime;
+
+                    chord.forEach((freq, idx) => {
+                        const osc = this.audioCtx.createOscillator();
+                        const gain = this.audioCtx.createGain();
+
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, t + idx * 0.14);
+
+                        gain.gain.setValueAtTime(0.0001, t + idx * 0.14);
+                        gain.gain.linearRampToValueAtTime(0.035, t + idx * 0.14 + 0.25);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, t + idx * 0.14 + 3.4);
+
+                        osc.connect(gain);
+                        gain.connect(this.audioCtx.destination);
+
+                        osc.start(t + idx * 0.14);
+                        osc.stop(t + idx * 0.14 + 3.6);
+                    });
+
+                    current = (current + 1) % chords.length;
+                };
+
+                step();
+                this.timer = setInterval(step, 3600);
+            }
+
+            start() {
+                this.isPlaying = true;
+                this.init();
+                this.playMelodicChords();
+            }
+
+            stop() {
+                this.isPlaying = false;
+                if (this.timer) {
+                    clearInterval(this.timer);
+                    this.timer = null;
+                }
+            }
+
+            toggle() {
+                if (this.isPlaying) this.stop();
+                else this.start();
+                return this.isPlaying;
+            }
+        }
+
+        /* ==========================================================================
+           INICIALIZACIÓN
+           ========================================================================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            const effects = new PetalPhysicsSystem(document.getElementById('effectsCanvas'));
+            const audio = new SubtleAudioPlayer();
+            const musicBtn = document.getElementById('musicToggleBtn');
+            const bouquetStage = document.getElementById('bouquetStage');
+            const burstLoveBtn = document.getElementById('burstLoveBtn');
+
+            // Iniciar efectos de partículas de inmediato
+            effects.start();
+
+            // Toque en el ramo artesanal
+            bouquetStage.addEventListener('click', (e) => {
+                effects.burst(e.clientX, e.clientY);
+            });
+
+            // Botón enviar amor
+            burstLoveBtn.addEventListener('click', (e) => {
+                const rect = burstLoveBtn.getBoundingClientRect();
+                effects.burst(rect.left + rect.width / 2, rect.top);
+            });
+
+            // Toques en pantalla
+            window.addEventListener('click', (e) => {
+                if (e.target.closest('button') || e.target.closest('a')) return;
+                effects.burst(e.clientX, e.clientY);
+            });
+
+            // Toggle Música
+            musicBtn.addEventListener('click', () => {
+                const playing = audio.toggle();
+                if (playing) {
+                    musicBtn.classList.add('playing');
+                    musicBtn.setAttribute('title', 'Pausar música');
+                } else {
+                    musicBtn.classList.remove('playing');
+                    musicBtn.setAttribute('title', 'Activar música');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

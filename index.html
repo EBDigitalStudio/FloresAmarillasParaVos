@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Flores Amarillas para Ti 🌻 | 21 de Septiembre</title>
+
+    <meta name="description" content="Un regalo digital especial de flores amarillas para celebrar el 21 de septiembre.">
+    <meta name="theme-color" content="#FEF3C7">
+
+    <!-- Tipografía Elegante y Refinada de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. SISTEMA DE DISEÑO Y VARIABLES (Ajustable fácilmente)
+           ========================================================================== */
+        :root {
+            /* Paleta Primaveral de Flores Amarillas */
+            --gold-primary: #F59E0B;
+            --yellow-sun: #FBBF24;
+            --yellow-bright: #FDE047;
+            --yellow-soft: #FEF08A;
+            --orange-warm: #EA580C;
+            --orange-accent: #F97316;
+
+            /* Verdes y Botánica */
+            --stem-deep: #4D7C0F;
+            --stem-leaf: #65A30D;
+            --leaf-bright: #84CC16;
+            --leaf-soft: #A3E635;
+            --soil-dark: #27380E;
+            --soil-light: #4A6B1A;
+
+            /* Fondos y Cristal */
+            --bg-cream-1: #FFFDF7;
+            --bg-cream-2: #FEF8E8;
+            --bg-cream-3: #FDEBC3;
+            --card-glass: rgba(255, 253, 248, 0.88);
+            --card-border: rgba(245, 158, 11, 0.22);
+            --card-glow: rgba(245, 158, 11, 0.12);
+
+            /* Tipografía y Textos */
+            --text-title: #2E2108;
+            --text-body: #4A3A19;
+            --text-muted: #8A6D3B;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+
+            /* Curvas de Movimiento Natural */
+            --ease-bloom: cubic-bezier(0.34, 1.4, 0.64, 1);
+            --ease-soft: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100svh;
+            min-height: -webkit-fill-available;
+            overflow: hidden;
+            font-family: var(--font-sans);
+            color: var(--text-body);
+            background: linear-gradient(175deg, #FFFDF8 0%, #FEF9E7 35%, #FDECBF 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            user-select: none;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Iluminación Primaveral Suave */
+        .ambient-light {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.9) 0%, rgba(254, 240, 138, 0.35) 45%, transparent 75%);
+        }
+
+        /* Partículas y Pétalos Canvas */
+        #effectsCanvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        /* ==========================================================================
+           2. BOTÓN DE MÚSICA DISCRETO Y MINIMALISTA
+           ========================================================================== */
+        .music-btn {
+            position: fixed;
+            top: clamp(16px, 3vh, 24px);
+            right: clamp(16px, 4vw, 24px);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 15px rgba(138, 109, 59, 0.08);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            transition: transform 0.3s var(--ease-soft), background 0.3s ease, border-color 0.3s ease;
+            color: var(--text-title);
+        }
+
+        .music-btn:hover {
+            transform: scale(1.08);
+            background: rgba(255, 255, 255, 0.98);
+            border-color: var(--gold-primary);
+        }
+
+        .music-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            transition: transform 0.3s ease;
+        }
+
+        .music-btn.playing {
+            color: var(--gold-primary);
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 16px rgba(245, 158, 11, 0.3);
+        }
+
+        .music-btn.playing svg {
+            animation: musicNoteBounce 2s infinite ease-in-out;
+        }
+
+        @keyframes musicNoteBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15) rotate(5deg); }
+        }
+
+        /* ==========================================================================
+           3. CONTENEDOR PRINCIPAL Y CENTRADO VISUAL (100svh Mobile-First)
+           ========================================================================== */
+        .main-stage {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(18px, 4vw, 36px);
+            text-align: center;
+        }
+
+        /* ==========================================================================
+           4. PANTALLA INICIAL (Intro Equilibrada y Centrada)
+           ========================================================================== */
+        .intro-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 480px;
+            width: 100%;
+            margin: auto 0; /* Centrado óptico vertical real */
+            transition: opacity 1.1s var(--ease-soft), transform 1.1s var(--ease-soft);
+        }
+
+        .intro-box.fade-out {
+            opacity: 0;
+            transform: scale(0.96) translateY(-14px);
+            pointer-events: none;
+        }
+
+        .intro-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            background: rgba(254, 240, 138, 0.45);
+            border: 1px solid rgba(245, 158, 11, 0.28);
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            backdrop-filter: blur(4px);
+        }
+
+        .intro-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.1rem, 5.8vw, 3.2rem);
+            font-weight: 600;
+            color: var(--text-title);
+            line-height: 1.25;
+            margin-bottom: 30px;
+            letter-spacing: -0.01em;
+            text-shadow: 0 2px 14px rgba(255, 255, 255, 0.9);
+        }
+
+        /* Botón "Descubrir mi regalo 💛" */
+        .btn-discover {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: clamp(14px, 3vh, 18px) clamp(28px, 6vw, 40px);
+            font-family: var(--font-sans);
+            font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+            font-weight: 600;
+            color: #382405;
+            background: linear-gradient(135deg, #FDE047 0%, #F59E0B 100%);
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.28), 0 2px 5px rgba(0,0,0,0.04);
+            transition: all 0.35s var(--ease-bloom);
+            overflow: hidden;
+        }
+
+        /* Efecto de Brillo Sutil */
+        .btn-discover::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+            transform: skewX(-25deg);
+            animation: discoverShimmer 4s infinite ease-in-out;
+        }
+
+        @keyframes discoverShimmer {
+            0%, 65% { left: -120%; }
+            100% { left: 160%; }
+        }
+
+        .btn-discover:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 14px 32px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-discover:active {
+            transform: translateY(-1px) scale(0.99);
+        }
+
+        /* ==========================================================================
+           5. TARJETA COMPACTA DE MENSAJE (Elegante y Proporcionada)
+           ========================================================================== */
+        .card-container {
+            position: relative;
+            z-index: 25;
+            max-width: 440px;
+            width: 100%;
+            margin: auto 0;
+            opacity: 0;
+            transform: translateY(28px) scale(0.96);
+            transition: opacity 1.3s var(--ease-soft), transform 1.3s var(--ease-bloom);
+            pointer-events: none;
+        }
+
+        .card-container.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .message-card {
+            background: var(--card-glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: clamp(26px, 5.5vw, 42px) clamp(20px, 4.5vw, 32px);
+            box-shadow: 
+                0 18px 45px rgba(110, 80, 20, 0.08),
+                0 6px 20px var(--card-glow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            text-align: center;
+            position: relative;
+        }
+
+        .card-tag {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .card-flower-badge {
+            font-size: 1.8rem;
+            line-height: 1;
+            margin-bottom: 14px;
+            display: inline-block;
+        }
+
+        /* Mensaje Exacto Solicitado */
+        .card-main-message {
+            font-family: var(--font-serif);
+            font-size: clamp(1.25rem, 4vw, 1.65rem);
+            font-weight: 500;
+            line-height: 1.42;
+            color: var(--text-title);
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+        }
+
+        .card-divider {
+            width: 45px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            margin: 0 auto 16px auto;
+            border-radius: 2px;
+        }
+
+        /* Subtítulo */
+        .card-subtitle {
+            font-family: var(--font-serif);
+            font-size: clamp(1.35rem, 4.2vw, 1.8rem);
+            font-weight: 700;
+            color: #B45309;
+            letter-spacing: 0.01em;
+            margin-bottom: 22px;
+        }
+
+        .card-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 6px;
+        }
+
+        .btn-bouquet-action {
+            background: linear-gradient(135deg, rgba(254, 240, 138, 0.9) 0%, rgba(251, 191, 36, 0.9) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            border-radius: 999px;
+            padding: 12px 26px;
+            font-family: var(--font-sans);
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #382405;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.22);
+            transition: all 0.3s var(--ease-bloom);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-bouquet-action:hover {
+            transform: translateY(-2px) scale(1.03);
+            background: linear-gradient(135deg, #FEF08A 0%, #F59E0B 100%);
+            box-shadow: 0 8px 24px rgba(245, 158, 11, 0.38);
+        }
+
+        .btn-bouquet-action:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* ==========================================================================
+           MODAL DEL RAMO DE FLORES AMARILLAS
+           ========================================================================== */
+        .bouquet-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(35, 25, 10, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .bouquet-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .bouquet-modal-card {
+            background: rgba(255, 253, 248, 0.96);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 28px;
+            padding: clamp(24px, 5vw, 36px) clamp(20px, 4vw, 32px);
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 40px rgba(245, 158, 11, 0.25);
+            transform: scale(0.85) translateY(20px);
+            transition: transform 0.5s var(--ease-bloom);
+            position: relative;
+        }
+
+        .bouquet-modal-overlay.active .bouquet-modal-card {
+            transform: scale(1) translateY(0);
+        }
+
+        .bouquet-svg-wrap {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .bouquet-title {
+            font-family: var(--font-serif);
+            font-size: clamp(1.45rem, 4.5vw, 1.85rem);
+            font-weight: 700;
+            color: #B45309;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .bouquet-message {
+            font-family: var(--font-serif);
+            font-size: clamp(1.05rem, 3.6vw, 1.25rem);
+            line-height: 1.45;
+            color: var(--text-title);
+            margin-bottom: 14px;
+        }
+
+        .bouquet-dedication {
+            font-family: var(--font-sans);
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--gold-primary);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 22px;
+        }
+
+        .btn-close-bouquet {
+            background: rgba(254, 240, 138, 0.5);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 999px;
+            padding: 8px 22px;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-body);
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .btn-close-bouquet:hover {
+            background: rgba(254, 240, 138, 0.85);
+            border-color: var(--gold-primary);
+            transform: translateY(-1px);
+        }
+
+        /* ==========================================================================
+           6. JARDÍN BOTÁNICO DE FLORES AMARILLAS EN CAPAS (SVG UNIFICADO)
+           ========================================================================== */
+        .garden-theater {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: clamp(180px, 32vh, 320px);
+            z-index: 5;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        /* Suelo Difuminado y Transición Orgánica */
+        .garden-soil {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: clamp(35px, 6vh, 60px);
+            background: linear-gradient(to top, rgba(54, 78, 15, 0.35) 0%, rgba(85, 122, 24, 0.15) 60%, transparent 100%);
+            z-index: 10;
+        }
+
+        .soil-contour {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            fill: #4D7C0F;
+            opacity: 0.25;
+        }
+
+        /* Contenedor de capas del jardín */
+        .garden-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+        }
+
+        /* Capa de Fondo (más pequeñas, desenfoque suave) */
+        .layer-background {
+            z-index: 6;
+            opacity: 0.75;
+            filter: blur(0.6px);
+            height: 78%;
+        }
+
+        /* Capa Media */
+        .layer-midground {
+            z-index: 7;
+            opacity: 0.92;
+            height: 88%;
+        }
+
+        /* Capa de Primer Plano (grandes, nítidas, detalladas) */
+        .layer-foreground {
+            z-index: 8;
+            opacity: 1;
+            height: 100%;
+        }
+
+        /* Entidad Botánica Flor: Suelo -> Tallo -> Hojas -> Cáliz -> Flor */
+        .botanical-flower {
+            position: absolute;
+            bottom: 0;
+            transform-origin: bottom center;
+            overflow: visible;
+        }
+
+        /* Brisa suave con ligeros desfases */
+        .sway-a { animation: gentleSway 5.4s infinite ease-in-out alternate; }
+        .sway-b { animation: gentleSway 6.8s infinite ease-in-out alternate-reverse; }
+        .sway-c { animation: gentleSway 4.8s infinite ease-in-out alternate; }
+
+        @keyframes gentleSway {
+            0% { transform: rotate(-2.2deg); }
+            100% { transform: rotate(2.8deg); }
+        }
+
+        /* Animaciones de Crecimiento del Jardín */
+        .flower-stem-curve {
+            stroke-dasharray: 400;
+            stroke-dashoffset: 400;
+            transition: stroke-dashoffset 2.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .flower-foliage-leaf {
+            transform: scale(0);
+            transition: transform 1.2s var(--ease-bloom);
+        }
+
+        .flower-bloom-head {
+            transform: scale(0);
+            transition: transform 1.5s var(--ease-bloom);
+        }
+
+        /* Al Activarse el Florecimiento */
+        .blooming-active .flower-stem-curve {
+            stroke-dashoffset: 0;
+        }
+
+        .blooming-active .flower-foliage-leaf {
+            transform: scale(1);
+        }
+
+        .blooming-active .flower-bloom-head {
+            transform: scale(1);
+        }
+
+        /* ==========================================================================
+           7. ACCESIBILIDAD Y REDUCED MOTION
+           ========================================================================== */
+        @media (prefers-reduced-motion: reduce) {
+            .sway-a, .sway-b, .sway-c, .music-btn.playing svg, .btn-discover::after {
+                animation: none !important;
+            }
+            .flower-stem-curve, .flower-foliage-leaf, .flower-bloom-head, .intro-box, .card-container {
+                transition: opacity 0.4s ease !important;
+            }
+        }
+
+        /* Ajustes específicos en pantallas pequeñas */
+        @media (max-width: 480px) {
+            .main-stage {
+                padding: 16px;
+            }
+            .message-card {
+                padding: 26px 18px;
+            }
+            .garden-theater {
+                height: 28vh;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Resplandor primaveral sutil de fondo -->
+    <div class="ambient-light"></div>
+
+    <!-- Canvas para lluvia de pétalos dorados -->
+    <canvas id="effectsCanvas"></canvas>
+
+    <!-- Botón de Audio Minimalista -->
+    <button id="musicToggleBtn" class="music-btn" aria-label="Activar música ambiental" title="Música ambiental">
+        <svg viewBox="0 0 24 24" id="musicIcon">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+    </button>
+
+    <!-- Escenario Principal (Centrado Vertical y Horizontal 100svh) -->
+    <main class="main-stage">
+
+        <!-- ==========================================================================
+             PANTALLA INICIAL (Intro Centrada Visualmente)
+             ========================================================================== -->
+        <section id="introBox" class="intro-box">
+            <div class="intro-badge">
+                <span>✨</span> 21 de Septiembre <span>✨</span>
+            </div>
+            <h1 class="intro-title">
+                Hay algo que quiero regalarte… 🌻
+            </h1>
+            <button id="discoverBtn" class="btn-discover">
+                <span>Descubrir mi regalo 💛</span>
+            </button>
+        </section>
+
+        <!-- ==========================================================================
+             TARJETA DE MENSAJE REVELADA (Compacta y Proporcionada)
+             ========================================================================== -->
+        <section id="cardContainer" class="card-container" aria-hidden="true">
+            <article class="message-card">
+                <div class="card-tag" id="recipientNameTag">Para ti</div>
+                <div class="card-flower-badge">🌻</div>
+
+                <!-- MENSAJE EXACTO SOLICITADO -->
+                <p class="card-main-message" id="exactMessageText">
+                    “Aunque hoy no pueda entregarte flores en persona, quería regalarte unas de una forma diferente…”
+                </p>
+
+                <div class="card-divider"></div>
+
+                <!-- SUBTÍTULO EXACTO -->
+                <h2 class="card-subtitle">
+                    Feliz 21 de septiembre 🌻💛
+                </h2>
+
+                <div class="card-buttons">
+                    <button id="openBouquetBtn" class="btn-bouquet-action">
+                        <span>💐 Recibir mi ramo de flores</span>
+                    </button>
+                </div>
+            </article>
+        </section>
+
+    </main>
+
+    <!-- ==========================================================================
+         JARDÍN BOTÁNICO DE FLORES AMARILLAS EN PROFUNDIDAD
+         ========================================================================== -->
+    <div id="gardenTheater" class="garden-theater" aria-hidden="true">
+        <!-- Capa de Fondo (pequeñas, profundidad) -->
+        <div id="layerBackground" class="garden-layer layer-background"></div>
+        <!-- Capa Media -->
+        <div id="layerMidground" class="garden-layer layer-midground"></div>
+        <!-- Capa de Primer Plano (principales y detalladas) -->
+        <div id="layerForeground" class="garden-layer layer-foreground"></div>
+
+        <!-- Silueta orgánica del suelo -->
+        <div class="garden-soil">
+            <svg class="soil-contour" viewBox="0 0 1200 40" preserveAspectRatio="none">
+                <path d="M0,40 Q300,10 600,25 T1200,15 L1200,40 L0,40 Z"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         LÓGICA JAVASCRIPT: BOTÁNICA, FÍSICA Y EXPERIENCIA
+         ========================================================================== -->
+    <script>
+        /* ==========================================================================
+           CONFIGURACIÓN FÁCILMENTE PERSONALIZABLE
+           ========================================================================== */
+        const CONFIG = {
+            // Nombre del destinatario (ej. "Para Sofía", "Para mi amor", o "")
+            recipientName: "Para ti",
+
+            // Mensaje principal exactamente como fue requerido
+            mainMessage: "“Aunque hoy no pueda entregarte flores en persona, quería regalarte unas de una forma diferente…”",
+
+            // Subtítulo
+            subtitle: "Feliz 21 de septiembre 🌻💛",
+
+            // Música ambiental: si tienes un enlace a un archivo MP3 colócalo aquí (ej: "cancion.mp3")
+            // Si es null, se utiliza automáticamente el sintetizador suave Web Audio API
+            audioUrl: null
+        };
+
+        /* ==========================================================================
+           GENERADOR BOTÁNICO DE FLORES SVG UNIFICADAS (Suelo -> Tallo -> Cáliz -> Flor)
+           ========================================================================== */
+        function createUnifiedBotanicalFlowerSVG(config) {
+            const {
+                scale = 1,
+                stemCurveX = 15,     // Desvío del tallo hacia izquierda o derecha
+                totalHeight = 280,   // Altura en píxeles del SVG
+                petalStyle = 0,      // Variación en pétalos
+                leafSide = 'both'    // 'left', 'right', 'both'
+            } = config;
+
+            const svgNS = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(svgNS, "svg");
+
+            const width = 140;
+            const height = totalHeight;
+            svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+            svg.setAttribute("width", `${width * scale}px`);
+            svg.setAttribute("height", `${height * scale}px`);
+            svg.classList.add("botanical-flower");
+
+            // Coordenadas calculadas
+            const baseRootX = width / 2;
+            const baseRootY = height;
+            const flowerApexX = baseRootX + stemCurveX;
+            const flowerApexY = 55; // Punto exacto donde culmina el tallo y nace la flor
+
+            // Punto de control Bézier para una curvatura natural
+            const controlX = baseRootX + (stemCurveX * 1.3);
+            const controlY = (baseRootY + flowerApexY) / 1.85;
+
+            // Identificadores únicos de degradados
+            const uid = Math.random().toString(36).substring(2, 9);
+            const petalGradId = `petalGrad_${uid}`;
+            const centerGradId = `centerGrad_${uid}`;
+            const stemGradId = `stemGrad_${uid}`;
+
+            const defs = document.createElementNS(svgNS, "defs");
+            defs.innerHTML = `
+                <!-- Degradado de Pétalos Amarillos Cálidos -->
+                <linearGradient id="${petalGradId}" x1="0%" y1="100%" x2="0%" y2="0%">
+                    <stop offset="0%" stop-color="#F59E0B" />
+                    <stop offset="45%" stop-color="#FBBF24" />
+                    <stop offset="85%" stop-color="#FDE047" />
+                    <stop offset="100%" stop-color="#FEF08A" />
+                </linearGradient>
+
+                <!-- Degradado del Centro de la Flor -->
+                <radialGradient id="${centerGradId}" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#78350F" />
+                    <stop offset="70%" stop-color="#451A03" />
+                    <stop offset="90%" stop-color="#92400E" />
+                    <stop offset="100%" stop-color="#D97706" />
+                </radialGradient>
+
+                <!-- Degradado del Tallo Verde Orgánico -->
+                <linearGradient id="${stemGradId}" x1="0%" y1="100%" x2="0%" y2="0%">
+                    <stop offset="0%" stop-color="#365314" />
+                    <stop offset="60%" stop-color="#4D7C0F" />
+                    <stop offset="100%" stop-color="#65A30D" />
+                </linearGradient>
+            `;
+            svg.appendChild(defs);
+
+            // 1. TALLO CONTINUO (Nace del suelo y termina exactamente en la flor)
+            const stemPath = document.createElementNS(svgNS, "path");
+            const stemD = `M ${baseRootX} ${baseRootY} Q ${controlX} ${controlY} ${flowerApexX} ${flowerApexY}`;
+            stemPath.setAttribute("d", stemD);
+            stemPath.setAttribute("fill", "none");
+            stemPath.setAttribute("stroke", `url(#${stemGradId})`);
+            stemPath.setAttribute("stroke-width", "5.5");
+            stemPath.setAttribute("stroke-linecap", "round");
+            stemPath.classList.add("flower-stem-curve");
+            svg.appendChild(stemPath);
+
+            // 2. HOJAS QUE BROTAN DIRECTAMENTE DEL TALLO
+            const leafGroup = document.createElementNS(svgNS, "g");
+            leafGroup.classList.add("flower-foliage-leaf");
+
+            // Hoja 1 (inferior izquierda)
+            if (leafSide === 'both' || leafSide === 'left') {
+                const nodeX = (baseRootX * 0.45 + controlX * 0.55);
+                const nodeY = (baseRootY * 0.45 + controlY * 0.55);
+                const leaf1 = document.createElementNS(svgNS, "path");
+                leaf1.setAttribute("d", `M ${nodeX} ${nodeY} Q ${nodeX - 35} ${nodeY - 30} ${nodeX - 45} ${nodeY - 15} Q ${nodeX - 25} ${nodeY + 10} ${nodeX} ${nodeY}`);
+                leaf1.setAttribute("fill", "#65A30D");
+                leaf1.setAttribute("opacity", "0.95");
+                leafGroup.appendChild(leaf1);
+            }
+
+            // Hoja 2 (media derecha)
+            if (leafSide === 'both' || leafSide === 'right') {
+                const nodeX2 = (controlX * 0.4 + flowerApexX * 0.6);
+                const nodeY2 = (controlY * 0.4 + flowerApexY * 0.6);
+                const leaf2 = document.createElementNS(svgNS, "path");
+                leaf2.setAttribute("d", `M ${nodeX2} ${nodeY2} Q ${nodeX2 + 38} ${nodeY2 - 25} ${nodeX2 + 48} ${nodeY2 - 10} Q ${nodeX2 + 25} ${nodeY2 + 12} ${nodeX2} ${nodeY2}`);
+                leaf2.setAttribute("fill", "#4D7C0F");
+                leaf2.setAttribute("opacity", "0.92");
+                leafGroup.appendChild(leaf2);
+            }
+            svg.appendChild(leafGroup);
+
+            // 3. CÁLIZ Y CABEZA DE LA FLOR (Anclada exactamente en flowerApexX, flowerApexY)
+            const headGroup = document.createElementNS(svgNS, "g");
+            headGroup.classList.add("flower-bloom-head");
+            headGroup.style.transformOrigin = `${flowerApexX}px ${flowerApexY}px`;
+
+            // Sépalos verdes detrás de la flor (cáliz de sostén)
+            for (let s = 0; s < 5; s++) {
+                const sepalAngle = (180 / 4) * s + 90;
+                const sepal = document.createElementNS(svgNS, "path");
+                sepal.setAttribute("d", `M ${flowerApexX} ${flowerApexY} Q ${flowerApexX - 8} ${flowerApexY + 14} ${flowerApexX} ${flowerApexY + 20} Q ${flowerApexX + 8} ${flowerApexY + 14} ${flowerApexX} ${flowerApexY}`);
+                sepal.setAttribute("fill", "#365314");
+                sepal.setAttribute("transform", `rotate(${sepalAngle}, ${flowerApexX}, ${flowerApexY})`);
+                headGroup.appendChild(sepal);
+            }
+
+            // Pétalos Principales (16 a 20 pétalos)
+            const numPetals = 16 + (petalStyle % 3) * 2;
+            const petalLen = 38;
+            const petalW = 12;
+
+            // Capa externa de pétalos amarillos
+            for (let p = 0; p < numPetals; p++) {
+                const angle = (360 / numPetals) * p;
+                const petal = document.createElementNS(svgNS, "path");
+                const pd = `M 0 0 C -${petalW} -${petalLen * 0.4} -${petalW * 0.7} -${petalLen} 0 -${petalLen} C ${petalW * 0.7} -${petalLen} ${petalW} -${petalLen * 0.4} 0 0`;
+                petal.setAttribute("d", pd);
+                petal.setAttribute("fill", `url(#${petalGradId})`);
+                petal.setAttribute("transform", `translate(${flowerApexX}, ${flowerApexY}) rotate(${angle})`);
+                headGroup.appendChild(petal);
+            }
+
+            // Capa interna de pétalos más claros para dar volumen 3D
+            for (let p = 0; p < numPetals; p++) {
+                const angle = (360 / numPetals) * p + (180 / numPetals);
+                const innerPetal = document.createElementNS(svgNS, "path");
+                const ipd = `M 0 0 C -${petalW * 0.6} -${petalLen * 0.25} -${petalW * 0.5} -${petalLen * 0.7} 0 -${petalLen * 0.7} C ${petalW * 0.5} -${petalLen * 0.7} ${petalW * 0.6} -${petalLen * 0.25} 0 0`;
+                innerPetal.setAttribute("d", ipd);
+                innerPetal.setAttribute("fill", "#FDE047");
+                innerPetal.setAttribute("opacity", "0.95");
+                innerPetal.setAttribute("transform", `translate(${flowerApexX}, ${flowerApexY}) rotate(${angle})`);
+                headGroup.appendChild(innerPetal);
+            }
+
+            // Centro Cálido/Dorado de la Flor
+            const centerCircle = document.createElementNS(svgNS, "circle");
+            centerCircle.setAttribute("cx", flowerApexX);
+            centerCircle.setAttribute("cy", flowerApexY);
+            centerCircle.setAttribute("r", "16");
+            centerCircle.setAttribute("fill", `url(#${centerGradId})`);
+            centerCircle.setAttribute("stroke", "#F59E0B");
+            centerCircle.setAttribute("stroke-width", "1.5");
+            headGroup.appendChild(centerCircle);
+
+            // Textura del disco central (semillas de girasol / polen dorado)
+            for (let d = 0; d < 10; d++) {
+                const dot = document.createElementNS(svgNS, "circle");
+                const rPos = Math.random() * 10;
+                const aPos = Math.random() * Math.PI * 2;
+                dot.setAttribute("cx", flowerApexX + Math.cos(aPos) * rPos);
+                dot.setAttribute("cy", flowerApexY + Math.sin(aPos) * rPos);
+                dot.setAttribute("r", (1.1 + Math.random() * 0.8).toFixed(1));
+                dot.setAttribute("fill", "#FDE047");
+                dot.setAttribute("opacity", "0.85");
+                headGroup.appendChild(dot);
+            }
+
+            svg.appendChild(headGroup);
+            return svg;
+        }
+
+        /* ==========================================================================
+           CONSTRUCCIÓN DEL JARDÍN CON CAPAS DE PROFUNDIDAD
+           ========================================================================== */
+        function assembleGardenLayers() {
+            const bgLayer = document.getElementById('layerBackground');
+            const midLayer = document.getElementById('layerMidground');
+            const foreLayer = document.getElementById('layerForeground');
+
+            bgLayer.innerHTML = '';
+            midLayer.innerHTML = '';
+            foreLayer.innerHTML = '';
+
+            const swayClasses = ['sway-a', 'sway-b', 'sway-c'];
+            const isMobile = window.innerWidth < 640;
+
+            // 1. Capa de Fondo (Flores distantes, más sutiles)
+            const bgCount = isMobile ? 3 : 5;
+            for (let i = 0; i < bgCount; i++) {
+                const flower = createUnifiedBotanicalFlowerSVG({
+                    scale: 0.58 + Math.random() * 0.08,
+                    stemCurveX: (Math.random() - 0.5) * 26,
+                    totalHeight: 220,
+                    petalStyle: i,
+                    leafSide: i % 2 === 0 ? 'left' : 'right'
+                });
+                flower.classList.add(swayClasses[i % 3]);
+                flower.style.left = `${(100 / (bgCount + 1)) * (i + 1) + (Math.random() * 8 - 4)}%`;
+                bgLayer.appendChild(flower);
+            }
+
+            // 2. Capa Media
+            const midCount = isMobile ? 4 : 6;
+            for (let i = 0; i < midCount; i++) {
+                const flower = createUnifiedBotanicalFlowerSVG({
+                    scale: 0.76 + Math.random() * 0.1,
+                    stemCurveX: (Math.random() - 0.5) * 32,
+                    totalHeight: 260,
+                    petalStyle: i + 1,
+                    leafSide: 'both'
+                });
+                flower.classList.add(swayClasses[(i + 1) % 3]);
+                flower.style.left = `${(100 / (midCount + 1)) * (i + 1) + (Math.random() * 6 - 3)}%`;
+                midLayer.appendChild(flower);
+            }
+
+            // 3. Capa de Primer Plano (Flores nítidas, protagónicas)
+            const foreCount = isMobile ? 3 : 5;
+            for (let i = 0; i < foreCount; i++) {
+                const flower = createUnifiedBotanicalFlowerSVG({
+                    scale: 0.98 + Math.random() * 0.15,
+                    stemCurveX: (Math.random() - 0.5) * 36,
+                    totalHeight: 300,
+                    petalStyle: i + 2,
+                    leafSide: 'both'
+                });
+                flower.classList.add(swayClasses[(i + 2) % 3]);
+                flower.style.left = `${(100 / (foreCount + 1)) * (i + 1) + (Math.random() * 4 - 2)}%`;
+                foreLayer.appendChild(flower);
+            }
+        }
+
+        /* ==========================================================================
+           FÍSICA DE PÉTALOS FLOTANTES Y DESTELLOS LUMINOSOS (CANVAS)
+           ========================================================================== */
+        class PetalPhysicsSystem {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.petals = [];
+                this.sparkles = [];
+                this.active = false;
+
+                this.resize();
+                window.addEventListener('resize', () => this.resize());
+            }
+
+            resize() {
+                this.width = this.canvas.width = window.innerWidth;
+                this.height = this.canvas.height = window.innerHeight;
+            }
+
+            createPetal(randomY = false) {
+                return {
+                    x: Math.random() * this.width,
+                    y: randomY ? Math.random() * this.height : -25,
+                    size: Math.random() * 9 + 8,
+                    speedY: Math.random() * 1.1 + 0.6,
+                    speedX: Math.random() * 0.8 - 0.4,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 1.8,
+                    color: ['#F59E0B', '#FBBF24', '#FDE047', '#FEF08A'][Math.floor(Math.random() * 4)],
+                    wobble: Math.random() * Math.PI * 2,
+                    wobbleSpeed: Math.random() * 0.025 + 0.015
+                };
+            }
+
+            createSparkle(x, y) {
+                return {
+                    x: x !== undefined ? x : Math.random() * this.width,
+                    y: y !== undefined ? y : Math.random() * this.height,
+                    size: Math.random() * 2.8 + 1,
+                    color: ['#FDE047', '#FBBF24', '#FFFDF7'][Math.floor(Math.random() * 3)],
+                    opacity: Math.random() * 0.7 + 0.3,
+                    speedY: -Math.random() * 0.7 - 0.2,
+                    speedX: (Math.random() - 0.5) * 0.5
+                };
+            }
+
+            burst(x, y) {
+                for (let i = 0; i < 18; i++) {
+                    this.sparkles.push(this.createSparkle(x, y));
+                }
+                for (let i = 0; i < 6; i++) {
+                    const p = this.createPetal(false);
+                    p.x = x + (Math.random() - 0.5) * 35;
+                    p.y = y + (Math.random() - 0.5) * 35;
+                    p.speedY = -Math.random() * 2.2 - 0.8; // flotan hacia arriba inicialmente
+                    this.petals.push(p);
+                }
+            }
+
+            start() {
+                if (this.active) return;
+                this.active = true;
+
+                for (let i = 0; i < 22; i++) {
+                    this.petals.push(this.createPetal(true));
+                }
+                for (let i = 0; i < 30; i++) {
+                    this.sparkles.push(this.createSparkle());
+                }
+
+                this.loop();
+            }
+
+            loop() {
+                if (!this.active) return;
+                this.ctx.clearRect(0, 0, this.width, this.height);
+
+                // Destellos
+                for (let i = this.sparkles.length - 1; i >= 0; i--) {
+                    const s = this.sparkles[i];
+                    s.y += s.speedY;
+                    s.x += s.speedX;
+                    s.opacity -= 0.004;
+
+                    if (s.opacity <= 0 || s.y < -10) {
+                        this.sparkles[i] = this.createSparkle(Math.random() * this.width, this.height + 10);
+                        continue;
+                    }
+
+                    this.ctx.save();
+                    this.ctx.globalAlpha = Math.max(0, s.opacity);
+                    this.ctx.fillStyle = s.color;
+                    this.ctx.beginPath();
+                    this.ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                    this.ctx.fill();
+                    this.ctx.restore();
+                }
+
+                // Pétalos
+                for (let i = this.petals.length - 1; i >= 0; i--) {
+                    const p = this.petals[i];
+                    p.wobble += p.wobbleSpeed;
+                    p.x += Math.sin(p.wobble) * 1.1 + p.speedX;
+                    p.y += p.speedY;
+                    p.rotation += p.rotationSpeed;
+
+                    if (p.y > this.height + 25) {
+                        this.petals[i] = this.createPetal(false);
+                        continue;
+                    }
+
+                    this.ctx.save();
+                    this.ctx.translate(p.x, p.y);
+                    this.ctx.rotate((p.rotation * Math.PI) / 180);
+                    this.ctx.fillStyle = p.color;
+                    this.ctx.globalAlpha = 0.88;
+
+                    // Forma natural de pétalo
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, 0);
+                    this.ctx.quadraticCurveTo(p.size / 2, -p.size / 2, 0, -p.size);
+                    this.ctx.quadraticCurveTo(-p.size / 2, -p.size / 2, 0, 0);
+                    this.ctx.fill();
+                    this.ctx.restore();
+                }
+
+                requestAnimationFrame(() => this.loop());
+            }
+        }
+
+        /* ==========================================================================
+           SISTEMA DE MÚSICA AMBIENTAL DISCRETA (Web Audio Synth + MP3)
+           ========================================================================== */
+        class SubtleAudioPlayer {
+            constructor(customUrl) {
+                this.customUrl = customUrl;
+                this.audioCtx = null;
+                this.isPlaying = false;
+                this.timer = null;
+                this.htmlAudio = customUrl ? new Audio(customUrl) : null;
+                if (this.htmlAudio) this.htmlAudio.loop = true;
+            }
+
+            init() {
+                if (!this.audioCtx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.audioCtx = new AudioContext();
+                }
+                if (this.audioCtx.state === 'suspended') {
+                    this.audioCtx.resume();
+                }
+            }
+
+            playMelodicChords() {
+                if (!this.isPlaying || !this.audioCtx) return;
+
+                // Armonía primaveral cálida en Mi Mayor (E - C#m - A - Badd9)
+                const chords = [
+                    [329.63, 392.00, 493.88, 659.25], // E major
+                    [277.18, 329.63, 440.00, 554.37], // C#m
+                    [220.00, 277.18, 329.63, 440.00], // A
+                    [246.94, 311.13, 392.00, 493.88]  // B
+                ];
+                let current = 0;
+
+                const step = () => {
+                    if (!this.isPlaying || !this.audioCtx) return;
+                    const chord = chords[current];
+                    const t = this.audioCtx.currentTime;
+
+                    chord.forEach((freq, idx) => {
+                        const osc = this.audioCtx.createOscillator();
+                        const gain = this.audioCtx.createGain();
+
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, t + idx * 0.14);
+
+                        // Envolvente acústica muy suave (piano ambiental)
+                        gain.gain.setValueAtTime(0.0001, t + idx * 0.14);
+                        gain.gain.linearRampToValueAtTime(0.035, t + idx * 0.14 + 0.25);
+                        gain.gain.exponentialRampToValueAtTime(0.0001, t + idx * 0.14 + 3.4);
+
+                        osc.connect(gain);
+                        gain.connect(this.audioCtx.destination);
+
+                        osc.start(t + idx * 0.14);
+                        osc.stop(t + idx * 0.14 + 3.6);
+                    });
+
+                    current = (current + 1) % chords.length;
+                };
+
+                step();
+                this.timer = setInterval(step, 3600);
+            }
+
+            start() {
+                this.isPlaying = true;
+                if (this.htmlAudio) {
+                    this.htmlAudio.play().catch(() => {});
+                } else {
+                    this.init();
+                    this.playMelodicChords();
+                }
+            }
+
+            stop() {
+                this.isPlaying = false;
+                if (this.htmlAudio) this.htmlAudio.pause();
+                if (this.timer) {
+                    clearInterval(this.timer);
+                    this.timer = null;
+                }
+            }
+
+            toggle() {
+                if (this.isPlaying) this.stop();
+                else this.start();
+                return this.isPlaying;
+            }
+        }
+
+        /* ==========================================================================
+           INICIALIZACIÓN Y TRANSICIÓN DE PANTALLAS
+           ========================================================================== */
+        document.addEventListener('DOMContentLoaded', () => {
+            const introBox = document.getElementById('introBox');
+            const discoverBtn = document.getElementById('discoverBtn');
+            const cardContainer = document.getElementById('cardContainer');
+            const gardenTheater = document.getElementById('gardenTheater');
+            const openBouquetBtn = document.getElementById('openBouquetBtn');
+            const exactMessageText = document.getElementById('exactMessageText');
+            const recipientNameTag = document.getElementById('recipientNameTag');
+
+            // Cargar datos de configuración
+            if (CONFIG.recipientName) {
+                recipientNameTag.textContent = CONFIG.recipientName;
+            } else {
+                recipientNameTag.style.display = 'none';
+            }
+            if (CONFIG.mainMessage) {
+                exactMessageText.textContent = CONFIG.mainMessage;
+            }
+
+            // Inicializar Sistemas
+            const petalPhysics = new PetalPhysicsSystem(document.getElementById('effectsCanvas'));
+            const audioPlayer = new SubtleAudioPlayer(CONFIG.audioUrl);
+
+            // Construir el Jardín Botánico
+            assembleGardenLayers();
+            window.addEventListener('resize', () => assembleGardenLayers());
+
+            // 1. TRANSICIÓN AL PRESIONAR "Descubrir mi regalo 💛"
+            discoverBtn.addEventListener('click', (e) => {
+                const rect = discoverBtn.getBoundingClientRect();
+                petalPhysics.burst(rect.left + rect.width / 2, rect.top);
+                petalPhysics.start();
+
+                // Desvanecimiento suave de la portada
+                introBox.classList.add('fade-out');
+
+                setTimeout(() => {
+                    introBox.style.display = 'none';
+
+                    // Florecimiento de tallos, hojas y flores
+                    gardenTheater.classList.add('blooming-active');
+
+                    // Revelación de la tarjeta con mensaje
+                    setTimeout(() => {
+                        cardContainer.classList.add('visible');
+                        cardContainer.setAttribute('aria-hidden', 'false');
+                    }, 1200);
+
+                }, 850);
+            });
+
+            // 2. CONTROL DISCRETO DE MÚSICA
+            musicToggleBtn.addEventListener('click', () => {
+                const playing = audioPlayer.toggle();
+                if (playing) {
+                    musicToggleBtn.classList.add('playing');
+                    musicToggleBtn.setAttribute('title', 'Pausar música');
+                } else {
+                    musicToggleBtn.classList.remove('playing');
+                    musicToggleBtn.setAttribute('title', 'Activar música');
+                }
+            });
+
+            // 3. TOQUES INTERACTIVOS EN PANTALLA
+            window.addEventListener('click', (e) => {
+                if (e.target.closest('button')) return;
+                if (petalPhysics.active) {
+                    petalPhysics.burst(e.clientX, e.clientY);
+                }
+            });
+
+            // 4. REDIRIGIR AL RAMO GRANDE Y REALISTA (ramo.html)
+            openBouquetBtn.addEventListener('click', (e) => {
+                const rect = openBouquetBtn.getBoundingClientRect();
+                petalPhysics.burst(rect.left + rect.width / 2, rect.top);
+                openBouquetBtn.style.transform = 'scale(0.96)';
+                setTimeout(() => {
+                    window.location.href = './ramo.html';
+                }, 400);
+            });
+        });
+    </script>
+</body>
+</html>
